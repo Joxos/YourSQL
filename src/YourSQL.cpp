@@ -20,11 +20,14 @@ using namespace std;
 int main() {
     cout << "Hello there. This is your SQL." << endl;
     string input;
-    vector<string> words;
-    while (input != "exit" && input != "quit") {
+    vector<string> words = { "" };
+    while (words[0] != "exit" && words[0] != "quit") {
         cout << "yourSQL >";
         input = getuntil(';');
         words = split(input);
+        for (auto node : words) {
+            cout << node << endl;
+        }
     }
     cout << "Bye." << endl;
     return 0;
