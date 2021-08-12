@@ -13,6 +13,8 @@ private:
     vector<Table> tables;
 public:
     string name;
-    bool createTable(string table_name);
-    bool dropTable(string table_name);
+    Database(string);
+    bool createTable(string);
+    Table getTable(string);
+    bool dropTable(string);
 };
