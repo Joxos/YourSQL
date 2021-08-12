@@ -13,6 +13,6 @@ private:
     vector<Table> tables;
 public:
     string name;
-    bool newTable(string table_name);
-    bool delTable(string table_name);
+    bool createTable(string table_name);
+    bool dropTable(string table_name);
 };

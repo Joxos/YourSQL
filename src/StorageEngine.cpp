@@ -8,9 +8,9 @@ void createDatabase(string name) {
     validateFolder(path.c_str());
 }
 
-bool Database::newTable(string table_name) {
+bool Database::createTable(string table_name) {
     for (auto i = tables.begin(); i != tables.end(); ++i) {
-        if ((*i).name == table_name) {
+        if (i->name == table_name) {
             return false;
         }
     }
@@ -21,7 +21,7 @@ bool Database::newTable(string table_name) {
     return true;
 }
 
-bool Database::delTable(string table_name) {
+bool Database::dropTable(string table_name) {
     for (auto i = tables.begin(); i != tables.end(); ++i) {
         if (i->name == table_name) {
             tables.erase(i);

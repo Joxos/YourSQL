@@ -23,3 +23,10 @@ void validateFolder(const char* runtime_path) {
     if (_access(runtime_path, 0) == -1)
         _mkdir(runtime_path);
 }
+
+void assert(bool should_be, bool res) {
+    if (should_be == res)
+        cout << "Good." << endl;
+    else
+        cout << "Bad!" << endl;
+}
