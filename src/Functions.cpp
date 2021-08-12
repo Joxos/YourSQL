@@ -1,4 +1,6 @@
 #include "Functions.h"
+#include <direct.h>
+#include <io.h>
 
 string getuntil(char sign) {
     char c;
@@ -16,19 +18,8 @@ void trim(string& msg) {
     msg.erase(msg.find_last_not_of(' ') + 1);
 }
 
-vector<string> split(string msg) {
-    string word;
-    vector<string> words;
-    for (auto c : msg) {
-        if (c != ' ' && c != '\n') {
-            word += c;
-        }
-        else if (word != "") {
-            words.push_back(word);
-            word = "";
-        }
-    }
-    if (word != "")
-        words.push_back(word);
-    return words;
+
+void validateFolder(const char* runtime_path) {
+    if (_access(runtime_path, 0) == -1)
+        _mkdir(runtime_path);
 }

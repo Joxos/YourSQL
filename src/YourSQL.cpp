@@ -25,10 +25,6 @@ int main() {
     while (words[0] != "exit" && words[0] != "quit") {
         cout << "yourSQL >";
         input = getuntil(';');
-        words = split(input);
-        for (auto node : words) {
-            cout << node << endl;
-        }
     }
     cout << "Bye." << endl;
     return 0;
