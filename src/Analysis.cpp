@@ -52,7 +52,7 @@ namespace analysis {
         return true;
     }
 
-	int foreach(TTree* tree, int u, int& cur) { //u���׽ڵ㣬cur���ڶ����token
+	int foreach(TTree* tree, int u, int& cur) { //u父亲节点，cur正在读入的token
 		if (cur > tksz - 1) return 0;
 		if (tokens[cur].ift == COMMAND) {
 			tree->insert(u, cur);
@@ -63,7 +63,7 @@ namespace analysis {
 			return foreach(tree, tokens.size() - 1, cur);
 		}
 		else if (tokens[cur].ift == VALUE || tokens[cur].ift == VARIABLE) {
-			if (cur <= tksz - 2) { //�ֲ�д��ֹ���
+			if (cur <= tksz - 2) { //分层写防止溢出
 				if (tokens[cur + 1].ift == OPERATOR) {
 					tokens.push_back(TNode("X", NUL));
 					tree->insert(u, tokens.size() - 1);
@@ -103,7 +103,7 @@ namespace analysis {
 		return tree;
 	}
 
-	//�������������������ÿ�㶼�Ƿ��ģ���������stack�㣬���з�������
+	//按层序输出语义树，但每层都是反的，懒得再用stack搞，自行反过来看
 	void printTree(TTree* tree, int u) {
 		queue<pair<TEdge, int> > q;
 		queue<int> fa;

@@ -1,19 +1,20 @@
 #pragma once
+#include <vector>
+#include <string>
 
-template <typename DataType>
-class Node {
-private:
-	DataType data;
-	Node* rightChild;
-	Node* belowChile;
-public:
-	Node();
-	~Node();
+using namespace std;
+
+struct Table {
+    string name;
 };
 
-template <typename DataType>
-Node<DataType>::Node() {}
-
-template<typename DataType>
-Node<DataType>::~Node() {
-}
+class Database {
+private:
+    vector<Table> tables;
+public:
+    string name;
+    Database(string);
+    bool createTable(string);
+    Table getTable(string);
+    bool dropTable(string);
+};

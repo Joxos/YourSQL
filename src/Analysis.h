@@ -9,8 +9,8 @@
 #include <map>
 #include "Functions.h"
 using namespace std;
-//�ʼǣ�ͷ�ļ���ֻ�ܷű����ͺ���������������д����
-//���⣺�ࡢconst������inline����
+//笔记：头文件中只能放变量和函数的声明，不能写定义
+//例外：类、const变量，inline函数
 
 namespace analysis {
     enum INF_TYPE {
@@ -42,7 +42,6 @@ namespace analysis {
         }
 		~TTree() { }
         bool insert(int u, int v);
-    private:
         TEdge eg[MAX_TOKEN];
         int p[MAX_TOKEN];
         int cur;
