@@ -11,7 +11,6 @@ SQL 可在数据库中创建视图
 SQL 可以设置表、存储过程和视图的权限
 */
 
-#include <iostream>
 #include <vector>
 #include "Functions.h"
 #include "StorageEngine.h"
@@ -50,4 +49,3 @@ int main() {
     printTree(tr, tksz);
     return 0;
 }
-

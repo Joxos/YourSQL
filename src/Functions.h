@@ -14,4 +14,6 @@ namespace analysis {
 }
 string getuntil(char sign);
 void trim(string& msg);
-vector<string> split(string msg);
+void validateFolder(const char*);
+void assert(bool, bool);
+

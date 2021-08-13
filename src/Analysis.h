@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <cstring>
 #include <vector>
@@ -9,50 +9,51 @@
 #include <map>
 #include "Functions.h"
 using namespace std;
-//±Ê¼Ç£ºÍ·ÎÄ¼þÖÐÖ»ÄÜ·Å±äÁ¿ºÍº¯ÊýµÄÉùÃ÷£¬²»ÄÜÐ´¶¨Òå
-//ÀýÍâ£ºÀà¡¢const±äÁ¿£¬inlineº¯Êý
+//ï¿½Ê¼Ç£ï¿½Í·ï¿½Ä¼ï¿½ï¿½ï¿½Ö»ï¿½Ü·Å±ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½â£ºï¿½à¡¢constï¿½ï¿½ï¿½ï¿½ï¿½ï¿½inlineï¿½ï¿½ï¿½ï¿½
 
 namespace analysis {
-	enum INF_TYPE {
-		NUL,
-		COMMAND,
-		VALUE,
-		OPERATOR, 
+    enum INF_TYPE {
+        NUL,
+        COMMAND,
+        VALUE,
+        OPERATOR,
 		VARIABLE, 
-		INVAILD
-	};
+        INVAILD
+    };
 
-	const int MAX_TOKEN = 1000;
+    const int MAX_TOKEN = 1000;
 
-	struct TNode {
+    struct TNode {
 		TNode() { }
 		TNode(string inff, INF_TYPE iftt) :inf(inff), ift(iftt) { }
-		string inf;
-		INF_TYPE ift;
-	};
+        string inf;
+        INF_TYPE ift;
+    };
 
-	struct TEdge {
-		int v, next;
-	};
+    struct TEdge {
+        int v, next;
+    };
 
-	class TTree {
-	public:
-		TTree() :cur(0) {
-			memset(p, -1, sizeof(p));
-		}
+    class TTree {
+    public:
+        TTree() :cur(0) {
+            memset(p, -1, sizeof(p));
+        }
 		~TTree() { }
-		bool insert(int u, int v);
-		TEdge eg[MAX_TOKEN];
-		int p[MAX_TOKEN];
-		int cur;
-	};
+        bool insert(int u, int v);
+    private:
+        TEdge eg[MAX_TOKEN];
+        int p[MAX_TOKEN];
+        int cur;
+    };
 
 
-	extern vector<TNode> tokens;
+    extern vector<TNode> tokens;
 	extern int tksz; //tokens[tksz] = root;
-	INF_TYPE judgeType(string& tk);
-	bool getTokens(string cmd);
-	void printTokens();
+    INF_TYPE judgeType(string& tk);
+    bool getTokens(string cmd);
+    void printTokens();
 	int foreach(TTree* tree, int u, int& cur);
 	TTree* analysisToken(string cmd);
 	void printTree(TTree* tree, int u);

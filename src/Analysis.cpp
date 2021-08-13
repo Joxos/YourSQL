@@ -1,58 +1,58 @@
-#include "Analysis.h"
+ï»¿#include "Analysis.h"
 
 namespace analysis {
-	vector<TNode> tokens;
+    vector<TNode> tokens;
 	int tksz = -1;
-	INF_TYPE judgeType(string& tk) {
-		if (regex_match(tk, regex("\\d+")) || (tk[0] == '\"' && tk[tk.size() - 1] == '\"')) {
-			//cout << "val" << endl;
-			return VALUE;
-		}
+    INF_TYPE judgeType(string& tk) {
+        if (regex_match(tk, regex("\\d+")) || (tk[0] == '\"' && tk[tk.size() - 1] == '\"')) {
+            //cout << "val" << endl;
+            return VALUE;
+        }
 		if (tk[0] == '_' && tk[tk.size() - 1] == '_') {
 			//cout << "var" << endl;
 			return VARIABLE;
 		}
-		if (jdge(tk, opts, osz)) {
-			//cout << "ope" << endl;
-			return OPERATOR;
-		}
-		if (jdge(tk, keyws, ksz)) {
-			//cout << "keyws" << endl;
-			return COMMAND;
-		}
-		//cout << "invaild" << endl;
-		return INVAILD;
-	}
+        if (jdge(tk, opts, osz)) {
+            //cout << "ope" << endl;
+            return OPERATOR;
+        }
+        if (jdge(tk, keyws, ksz)) {
+            //cout << "keyws" << endl;
+            return COMMAND;
+        }
+        //cout << "invaild" << endl;
+        return INVAILD;
+    }
 
-	bool getTokens(string cmd) {
-		istringstream ss(cmd);
-		while (ss.rdbuf()->in_avail() > 0) {
-			string temp;
-			ss >> temp;
-			if (temp == "") break;
-			tokens.push_back(TNode(temp, judgeType(temp)));
-			if (tokens[tokens.size() - 1].ift == INVAILD) return false;
-		}
+    bool getTokens(string cmd) {
+        istringstream ss(cmd);
+        while (ss.rdbuf()->in_avail() > 0) {
+            string temp;
+            ss >> temp;
+            if (temp == "") break;
+            tokens.push_back(TNode(temp, judgeType(temp)));
+            if (tokens[tokens.size() - 1].ift == INVAILD) return false;
+        }
 		tksz = tokens.size();
-		return true;
-	}
+        return true;
+    }
 
-	void printTokens() {
-		for (int i = 0; i < tokens.size(); i++) {
-			cout << tokens[i].ift << tokens[i].inf << endl;
-		}
-	}
+    void printTokens() {
+        for (int i = 0; i < tokens.size(); i++) {
+            cout << tokens[i].ift << tokens[i].inf << endl;
+        }
+    }
 
-	bool TTree::insert(int u, int v) {
-		if (cur >= MAX_TOKEN)
-			return false;
-		eg[cur].v = v;
-		eg[cur].next = p[u];
-		p[u] = cur++;
-		return true;
-	}
+    bool TTree::insert(int u, int v) {
+        if (cur >= MAX_TOKEN)
+            return false;
+        eg[cur].v = v;
+        eg[cur].next = p[u];
+        p[u] = cur++;
+        return true;
+    }
 
-	int foreach(TTree* tree, int u, int& cur) { //u¸¸Ç×½Úµã£¬curÕýÔÚ¶ÁÈëµÄtoken
+	int foreach(TTree* tree, int u, int& cur) { //uï¿½ï¿½ï¿½×½Úµã£¬curï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½token
 		if (cur > tksz - 1) return 0;
 		if (tokens[cur].ift == COMMAND) {
 			tree->insert(u, cur);
@@ -63,7 +63,7 @@ namespace analysis {
 			return foreach(tree, tokens.size() - 1, cur);
 		}
 		else if (tokens[cur].ift == VALUE || tokens[cur].ift == VARIABLE) {
-			if (cur <= tksz - 2) { //·Ö²ãÐ´·ÀÖ¹Òç³ö
+			if (cur <= tksz - 2) { //ï¿½Ö²ï¿½Ð´ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½
 				if (tokens[cur + 1].ift == OPERATOR) {
 					tokens.push_back(TNode("X", NUL));
 					tree->insert(u, tokens.size() - 1);
@@ -103,7 +103,7 @@ namespace analysis {
 		return tree;
 	}
 
-	//°´²ãÐòÊä³öÓïÒåÊ÷£¬µ«Ã¿²ã¶¼ÊÇ·´µÄ£¬ÀÁµÃÔÙÓÃstack¸ã£¬×ÔÐÐ·´¹ýÀ´¿´
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ã¶¼ï¿½Ç·ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½stackï¿½ã£¬ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void printTree(TTree* tree, int u) {
 		queue<pair<TEdge, int> > q;
 		queue<int> fa;
@@ -128,5 +128,5 @@ namespace analysis {
 			}
 		}
 		cout << endl << endl;
-	}
+    }
 }
