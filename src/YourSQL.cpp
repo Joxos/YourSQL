@@ -34,12 +34,18 @@ int main() {
     }
     cout << "Bye." << endl;
     */
-    string st;
+    /* lex analysis test
+    * string st;
     getline(cin, st);
     if (!getTokens(st)) {
         cout << "INVAILD!" << endl;
         return 0;
     }
     printTokens();
+    */
+    string a;
+    getline(cin, a);
+    TTree* tr = analysisToken(a);
+    printTree(tr, tksz);
     return 0;
 }
