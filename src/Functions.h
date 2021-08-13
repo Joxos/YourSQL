@@ -9,6 +9,7 @@ namespace analysis {
 	extern int osz, ksz;
 	extern string opts[];
 	extern string keyws[];
+	extern int priorty[];
 	bool jdge(string str, string* lst, int sz);
 }
 string getuntil(char sign);

@@ -2,7 +2,8 @@
 #include "Functions.h"
 
 namespace analysis {
-    string opts[] = { "<=", ">=", "==", "!=" };
+    string opts[] = { "<=", ">=", "==", "!=", "+", "-", "*", "/" };
+    int priority[] = { 0, 0, 0, 0, 1, 1, 2, 2 };
     int osz = sizeof(opts) / sizeof(string); //笔记：sizeof只能在其数组定义的同文件内发挥作用
     string keyws[] = { "create", "delete", "add", "select" }; //待定
     int ksz = sizeof(keyws) / sizeof(string);

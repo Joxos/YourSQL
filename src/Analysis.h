@@ -5,6 +5,8 @@
 #include <sstream>
 #include <iostream>
 #include <regex>
+#include <queue>
+#include <map>
 #include "Functions.h"
 using namespace std;
 //笔记：头文件中只能放变量和函数的声明，不能写定义
@@ -15,7 +17,8 @@ namespace analysis {
 		NUL,
 		COMMAND,
 		VALUE,
-		OPERATOR,
+		OPERATOR, 
+		VARIABLE, 
 		INVAILD
 	};
 
@@ -39,7 +42,6 @@ namespace analysis {
 		}
 		~TTree() { }
 		bool insert(int u, int v);
-	private:
 		TEdge eg[MAX_TOKEN];
 		int p[MAX_TOKEN];
 		int cur;
@@ -47,8 +49,11 @@ namespace analysis {
 
 
 	extern vector<TNode> tokens;
+	extern int tksz; //tokens[tksz] = root;
 	INF_TYPE judgeType(string& tk);
 	bool getTokens(string cmd);
 	void printTokens();
-	TTree* analysisToken();
+	int foreach(TTree* tree, int u, int& cur);
+	TTree* analysisToken(string cmd);
+	void printTree(TTree* tree, int u);
 }
