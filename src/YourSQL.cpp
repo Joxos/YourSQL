@@ -11,22 +11,35 @@ SQL 可在数据库中创建视图
 SQL 可以设置表、存储过程和视图的权限
 */
 
-#include <iostream>
 #include <vector>
 #include "Functions.h"
 #include "StorageEngine.h"
+#include "Analysis.h"
 
 using namespace std;
+using namespace analysis;
 
 int main() {
+    /*
     cout << "Hello there. This is your SQL." << endl;
     string input;
     vector<string> words = { "" };
     while (words[0] != "exit" && words[0] != "quit") {
         cout << "yourSQL >";
         input = getuntil(';');
+        words = split(input);
+        for (auto node : words) {
+            cout << node << endl;
+        }
     }
     cout << "Bye." << endl;
+    */
+    string st;
+    getline(cin, st);
+    if (!getTokens(st)) {
+        cout << "INVAILD!" << endl;
+        return 0;
+    }
+    printTokens();
     return 0;
 }
-
