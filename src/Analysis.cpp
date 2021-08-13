@@ -69,14 +69,14 @@ namespace analysis {
 					tree->insert(u, tokens.size() - 1);
 					tree->insert(tokens.size() - 1, cur);
 					cur++;
-					printTree(tree, tksz);
+					//printTree(tree, tksz);
 					return foreach(tree, u, cur);
 				}
 			}
 			else {
 				tree->insert(u, cur);
 				cur++;
-				printTree(tree, tksz);
+				//printTree(tree, tksz);
 				return foreach(tree, cur - 1, cur);
 			}
 		}
@@ -85,11 +85,11 @@ namespace analysis {
 			tokens.push_back(TNode("X", NUL));
 			tree->insert(u, tokens.size() - 1);
 			cur++;
-			printTree(tree, tksz);
+			//printTree(tree, tksz);
 			return foreach(tree, tokens.size() - 1, cur);
 		}
 		else {
-			printTree(tree, tksz);
+			//printTree(tree, tksz);
 			return 1;
 		}
 	}
