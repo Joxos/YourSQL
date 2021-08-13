@@ -46,6 +46,10 @@ int main() {
     string a;
     getline(cin, a);
     TTree* tr = analysisToken(a);
+    if (tr == nullptr) {
+        cout << "INVAILD" << endl;
+        return -1;
+    }
     printTree(tr, tksz);
     return 0;
 }

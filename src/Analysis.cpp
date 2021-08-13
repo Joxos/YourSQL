@@ -95,7 +95,9 @@ namespace analysis {
 	}
 
 	TTree* analysisToken(string cmd) {
-		getTokens(cmd);
+		if (!getTokens(cmd)) {
+			return nullptr;
+		}
 		TTree* tree = new TTree();
 		tokens.push_back(TNode("X", NUL));
 		int currentRead = 0;
