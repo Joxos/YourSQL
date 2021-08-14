@@ -2,16 +2,16 @@
 
 namespace analysis {
     vector<TNode> tokens;
-	int tksz = -1;
+    int tksz = -1;
     INF_TYPE judgeType(string& tk) {
         if (regex_match(tk, regex("\\d+")) || (tk[0] == '\"' && tk[tk.size() - 1] == '\"')) {
             //cout << "val" << endl;
             return VALUE;
         }
-		if (tk[0] == '_' && tk[tk.size() - 1] == '_') {
-			//cout << "var" << endl;
-			return VARIABLE;
-		}
+        if (tk[0] == '_' && tk[tk.size() - 1] == '_') {
+            //cout << "var" << endl;
+            return VARIABLE;
+        }
         if (jdge(tk, opts, osz)) {
             //cout << "ope" << endl;
             return OPERATOR;
@@ -33,7 +33,7 @@ namespace analysis {
             tokens.push_back(TNode(temp, judgeType(temp)));
             if (tokens[tokens.size() - 1].ift == INVAILD) return false;
         }
-		tksz = tokens.size();
+        tksz = tokens.size();
         return true;
     }
 
@@ -103,30 +103,30 @@ namespace analysis {
 		return tree;
 	}
 
-	//按层序输出语义树，但每层都是反的，懒得再用stack搞，自行反过来看
-	void printTree(TTree* tree, int u) {
-		queue<pair<TEdge, int> > q;
-		queue<int> fa;
-		for (int i = tree->p[u]; i != -1; i = tree->eg[i].next) {
-			q.push(make_pair(tree->eg[i], 0));
-			fa.push(u);
-		}
-		int cr = 0;
-		while (!q.empty()) {
-			pair<TEdge, int> tg = q.front();
-			q.pop();
-			if (tg.second > cr) {
-				cout << endl;
-				cr++;
-			}
-			cout << tokens[fa.front()].inf << "->" << tokens[tg.first.v].inf << " ";
-			fa.pop();
-			int v = tg.first.v;
-			for (int i = tree->p[v]; i != -1; i = tree->eg[i].next) {
-				q.push(make_pair(tree->eg[i], tg.second + 1));
-				fa.push(v);
-			}
-		}
-		cout << endl << endl;
+    //按层序输出语义树，但每层都是反的，懒得再用stack搞，自行反过来看
+    void printTree(TTree* tree, int u) {
+        queue<pair<TEdge, int> > q;
+        queue<int> fa;
+        for (int i = tree->p[u]; i != -1; i = tree->eg[i].next) {
+            q.push(make_pair(tree->eg[i], 0));
+            fa.push(u);
+        }
+        int cr = 0;
+        while (!q.empty()) {
+            pair<TEdge, int> tg = q.front();
+            q.pop();
+            if (tg.second > cr) {
+                cout << endl;
+                cr++;
+            }
+            cout << tokens[fa.front()].inf << "->" << tokens[tg.first.v].inf << " ";
+            fa.pop();
+            int v = tg.first.v;
+            for (int i = tree->p[v]; i != -1; i = tree->eg[i].next) {
+                q.push(make_pair(tree->eg[i], tg.second + 1));
+                fa.push(v);
+            }
+        }
+        cout << endl << endl;
     }
 }
