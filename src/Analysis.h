@@ -1,14 +1,16 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <cstring>
 #include <vector>
 #include <sstream>
 #include <iostream>
 #include <regex>
+#include <queue>
+#include <map>
 #include "Functions.h"
 using namespace std;
-//±Ê¼Ç£ºÍ·ÎÄ¼şÖĞÖ»ÄÜ·Å±äÁ¿ºÍº¯ÊıµÄÉùÃ÷£¬²»ÄÜĞ´¶¨Òå
-//ÀıÍâ£ºÀà¡¢const±äÁ¿£¬inlineº¯Êı
+//ç¬”è®°ï¼šå¤´æ–‡ä»¶ä¸­åªèƒ½æ”¾å˜é‡å’Œå‡½æ•°çš„å£°æ˜ï¼Œä¸èƒ½å†™å®šä¹‰
+//ä¾‹å¤–ï¼šç±»ã€constå˜é‡ï¼Œinlineå‡½æ•°
 
 namespace analysis {
     enum INF_TYPE {
@@ -16,14 +18,15 @@ namespace analysis {
         COMMAND,
         VALUE,
         OPERATOR,
+		VARIABLE, 
         INVAILD
     };
 
     const int MAX_TOKEN = 1000;
 
     struct TNode {
-        TNode() {}
-        TNode(string inff, INF_TYPE iftt) :inf(inff), ift(iftt) {}
+		TNode() { }
+		TNode(string inff, INF_TYPE iftt) :inf(inff), ift(iftt) { }
         string inf;
         INF_TYPE ift;
     };
@@ -37,9 +40,8 @@ namespace analysis {
         TTree() :cur(0) {
             memset(p, -1, sizeof(p));
         }
-        ~TTree() {}
+		~TTree() { }
         bool insert(int u, int v);
-    private:
         TEdge eg[MAX_TOKEN];
         int p[MAX_TOKEN];
         int cur;
@@ -47,8 +49,11 @@ namespace analysis {
 
 
     extern vector<TNode> tokens;
+	extern int tksz; //tokens[tksz] = root;
     INF_TYPE judgeType(string& tk);
     bool getTokens(string cmd);
     void printTokens();
-    TTree* analysisToken();
+	int foreach(TTree* tree, int u, int& cur);
+	TTree* analysisToken(string cmd);
+	void printTree(TTree* tree, int u);
 }

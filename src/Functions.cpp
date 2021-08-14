@@ -2,8 +2,21 @@
 #include <direct.h>
 #include <io.h>
 
+void validateFolder(const char* runtime_path) {
+    if (_access(runtime_path, 0) == -1)
+        _mkdir(runtime_path);
+}
+
+void assert(bool should_be, bool res) {
+    if (should_be == res)
+        cout << "Good." << endl;
+    else
+        cout << "Bad!" << endl;
+}
+
 namespace analysis {
-    string opts[] = { "<=", ">=", "==", "!=" };
+    string opts[] = { "<=", ">=", "==", "!=", "+", "-", "*", "/" };
+    int priority[] = { 0, 0, 0, 0, 1, 1, 2, 2 };
     int osz = sizeof(opts) / sizeof(string); //笔记：sizeof只能在其数组定义的同文件内发挥作用
     string keyws[] = { "create", "delete", "add", "select" }; //待定
     int ksz = sizeof(keyws) / sizeof(string);
@@ -40,15 +53,20 @@ void trim(string& msg) {
     msg.erase(msg.find_last_not_of(' ') + 1);
 }
 
-
-void validateFolder(const char* runtime_path) {
-    if (_access(runtime_path, 0) == -1)
-        _mkdir(runtime_path);
+vector<string> split(string msg) {
+    string word;
+    vector<string> words;
+    for (auto c : msg) {
+        if (c != ' ' && c != '\n') {
+            word += c;
+        }
+        else if (word != "") {
+            words.push_back(word);
+            word = "";
+        }
+    }
+    if (word != "")
+        words.push_back(word);
+    return words;
 }
 
-void assert(bool should_be, bool res) {
-    if (should_be == res)
-        cout << "Good." << endl;
-    else
-        cout << "Bad!" << endl;
-}
