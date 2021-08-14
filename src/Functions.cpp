@@ -17,18 +17,18 @@ void assert(bool should_be, bool res) {
 namespace analysis {
     string opts[] = { "<=", ">=", "==", "!=", "+", "-", "*", "/" };
     int priority[] = { 0, 0, 0, 0, 1, 1, 2, 2 };
-    int osz = sizeof(opts) / sizeof(string); //±Ê¼Ç£ºsizeofÖ»ÄÜÔÚÆäÊı×é¶¨ÒåµÄÍ¬ÎÄ¼şÄÚ·¢»Ó×÷ÓÃ
-    string keyws[] = { "create", "delete", "add", "select" }; //´ı¶¨
+    int osz = sizeof(opts) / sizeof(string); //ç¬”è®°ï¼šsizeofåªèƒ½åœ¨å…¶æ•°ç»„å®šä¹‰çš„åŒæ–‡ä»¶å†…å‘æŒ¥ä½œç”¨
+    string keyws[] = { "create", "delete", "add", "select" }; //å¾…å®š
     int ksz = sizeof(keyws) / sizeof(string);
-    //¼ì²éstrÊÇ·ñÎªlst¼¯ÖĞÔªËØ£¬lst´óĞ¡Îªsz
+    //æ£€æŸ¥stræ˜¯å¦ä¸ºlsté›†ä¸­å…ƒç´ ï¼Œlstå¤§å°ä¸ºsz
     bool jdge(string str, string* lst, int sz) {
-        /* ±Ê¼Ç£º
+        /* ç¬”è®°ï¼š
         * if (find(lst, lst + sz + 1, str) != lst + sz + 1) {
             cout << *lst << " " << *find(lst, lst + sz + 1, str) << endl;
             return true;
           }
-          Àë´óÆ×£¬optsºÍkeywsÔÚÄÚ´æÀïÊÇÁ¬ĞøµÄ£¬²»ÄÜÓÃÈçÉÏ·½·¨ËÑË÷£¬·ñÔòopt + sz + 1ÕıºÃ¾ÍÊÇkeyws[0]
-          Ö»ÄÜÓÃÀ¬»øforÑ­»·ÁË,mdzz......
+          ç¦»å¤§è°±ï¼Œoptså’Œkeywsåœ¨å†…å­˜é‡Œæ˜¯è¿ç»­çš„ï¼Œä¸èƒ½ç”¨å¦‚ä¸Šæ–¹æ³•æœç´¢ï¼Œå¦åˆ™opt + sz + 1æ­£å¥½å°±æ˜¯keyws[0]
+          åªèƒ½ç”¨åƒåœ¾forå¾ªç¯äº†,mdzz......
         */
         for (int i = 0; i < sz; i++)
             if (str == *(lst + i))
