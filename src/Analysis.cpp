@@ -59,7 +59,7 @@ namespace analysis {
 			tokens.push_back(TNode("X", NUL));
 			tree->insert(u, tokens.size() - 1);
 			cur++;
-			printTree(tree, tksz);
+			//printTree(tree, tksz);
 			return foreach(tree, tokens.size() - 1, cur);
 		}
 		else if (tokens[cur].ift == VALUE || tokens[cur].ift == VARIABLE) {
